@@ -1,0 +1,9 @@
+<p>product id {{ id }} works!</p>
+<p>Product component initialized at: {{ myDate }}</p>
+<p>Random number is {{random}}</p>
+
+@if(isServer) {
+  <p>This content is only visible on the server.</p>    
+}@else {
+    <div>This content is only visible on the client.</div>
+}
