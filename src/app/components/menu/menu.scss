@@ -1,0 +1,25 @@
+// Stili per il menu orizzontale
+.menu {
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    margin-right: 2rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    &:hover {
+      color: #007bff;
+    }
+  }
+}
