@@ -1,30 +1,33 @@
-import { RenderMode, ServerRoute } from '@angular/ssr';
+import { RenderMode, ServerRoute } from "@angular/ssr";
 
 export const serverRoutes: ServerRoute[] = [
   {
-      path: '',
-      renderMode: RenderMode.Client,
+    path: "",
+    renderMode: RenderMode.Client,
   },
-  
-  {
-      path: 'home',
-      renderMode: RenderMode.Client
-  },
-  {
-      path: 'client',
-      renderMode: RenderMode.Client,
-  },
-  {
-      path: 'static',
-      renderMode: RenderMode.Prerender,
-  },
-  {
-    path: 'static/:id',
-    renderMode: RenderMode.Server
 
+  {
+    path: "home",
+    renderMode: RenderMode.Client,
   },
   {
-      path: 'ssr',
-      renderMode: RenderMode.Server
-  }
+    path: "client",
+    renderMode: RenderMode.Client,
+  },
+  {
+    path: "static",
+    renderMode: RenderMode.Prerender,
+  },
+  {
+    path: "static/:id",
+    renderMode: RenderMode.Server,
+  },
+  {
+    path: "ssr",
+    renderMode: RenderMode.Server,
+  },
+  {
+    path: "isr",
+    renderMode: RenderMode.Prerender,
+  },
 ];
