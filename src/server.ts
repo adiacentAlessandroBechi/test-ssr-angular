@@ -62,6 +62,34 @@ export function app(): express.Express {
   // /**
   //  * Handle all other requests by rendering the Angular application.
   //  */
+
+  // Example Express Rest API endpoints
+  // server.get('/api/**', (req, res) => { });
+  // Serve static files from /browser
+  server.get(
+    "/*any",
+    express.static(browserDistFolder, {
+      maxAge: "1y",
+    }),
+  );
+
+  // 3. 👇 Use the ISRHandler to handle the requests
+  server.get(
+    "/*any",
+    // Serve page if it exists in cache
+    async (req, res, next) => await isr.serveFromCache(req, res, next),
+    // Server side render the page and add to cache if needed
+    async (req, res, next) => await isr.render(req, res, next),
+
+    async (req, res, next) =>
+      await angularApp
+        .handle(req)
+        .then((response) =>
+          response ? writeResponseToNodeResponse(response, res) : next(),
+        )
+        .catch(next),
+  );
+
   // server.use((req, res, next) => {
   //   angularApp
   //     .handle(req)
@@ -70,25 +98,6 @@ export function app(): express.Express {
   //     )
   //     .catch(next);
   // });
-
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
-  // Serve static files from /browser
-  server.get(
-    "*.*",
-    express.static(browserDistFolder, {
-      maxAge: "1y",
-    }),
-  );
-
-  // 3. 👇 Use the ISRHandler to handle the requests
-  server.get(
-    "*",
-    // Serve page if it exists in cache
-    async (req, res, next) => await isr.serveFromCache(req, res, next),
-    // Server side render the page and add to cache if needed
-    async (req, res, next) => await isr.render(req, res, next),
-  );
 
   /**
    * Start the server if this module is the main entry point.

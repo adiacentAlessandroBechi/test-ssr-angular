@@ -28,6 +28,6 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: "isr",
-    renderMode: RenderMode.Prerender,
+    renderMode: RenderMode.Server,
   },
 ];
